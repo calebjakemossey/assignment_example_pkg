@@ -34,7 +34,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
           REPO: ${{ github.repository }}
-          REF: ${{ github.ref }}
+          REF: ${{ github.ref_name }}
           SHA: ${{ github.sha }}
         run: |
           gh api repos/calebjakemossey/assignment_example_ros_pkg/dispatches \
