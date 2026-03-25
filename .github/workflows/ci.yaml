@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    uses: calebjakemossey/ci-workflows/.github/workflows/python-ci.yaml@v1
+    with:
+      test-command: 'python -m pytest --junitxml=test-results/results.xml tests/'
+      python-versions: '["3.10", "3.11", "3.12"]'
+
+  # Notify the ROS package repo when main changes so it can run a
+  # compatibility check against the latest version of this library.
+  # Requires the DISPATCH_TOKEN repository secret to be configured
+  # with a PAT that has repo scope on assignment_example_ros_pkg.
+  notify-downstream:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [ci]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger downstream compatibility check
+        env:
+          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+          REPO: ${{ github.repository }}
+          REF: ${{ github.ref }}
+          SHA: ${{ github.sha }}
+        run: |
+          gh api repos/calebjakemossey/assignment_example_ros_pkg/dispatches \
+            --method POST \
+            --field event_type=dependency-updated \
+            -f "client_payload[repo]=${REPO}" \
+            -f "client_payload[ref]=${REF}" \
+            -f "client_payload[sha]=${SHA}"
