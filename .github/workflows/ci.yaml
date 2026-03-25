@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  checks: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -14,7 +18,7 @@ jobs:
   ci:
     uses: calebjakemossey/ci-workflows/.github/workflows/python-ci.yaml@v1
     with:
-      test-command: 'python -m pytest --junitxml=test-results/results.xml tests/'
+      test-command: 'python -m pytest tests/'
       python-versions: '["3.10", "3.11", "3.12"]'
 
   # Notify the ROS package repo when main changes so it can run a
