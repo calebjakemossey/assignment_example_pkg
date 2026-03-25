@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+    <name>example_package</name>
+    <version>0.0.1</version>
+    <description>ROS-independent example package</description>
+    <maintainer email="example@example.com">Some Name</maintainer>
+    <license>TODO</license>
+
+    <buildtool_depend>ament_python</buildtool_depend>
+
+    <!-- Specify the build type -->
+    <export>
+        <build_type>ament_python</build_type>
+    </export>
+</package>
+
