@@ -1,6 +1,24 @@
 # Example Package
 
+![CI](https://github.com/calebjakemossey/assignment_example_pkg/actions/workflows/ci.yaml/badge.svg)
+
 This is a ROS-independent Python package containing the `Example` class. It can be used separately from ROS for general-purpose applications.
+
+## System Overview
+
+```mermaid
+graph LR
+    A[assignment_example_pkg<br/>Python Library] -->|imported by| B[example_package_ros<br/>ROS2 Nodes]
+    B -->|uses messages from| C[example_package_msgs<br/>Service/Action Definitions]
+    style A fill:#4CAF50,color:#fff
+```
+
+> **Note on ROS2 distribution:** The original assignment referenced ROS2 Iron,
+> which reached end-of-life in December 2024. The CI pipeline targets ROS2
+> Humble (LTS, supported until May 2027).
+
+For details on the CI architecture and shared workflow design, see the
+[ci-workflows repository](https://github.com/calebjakemossey/ci-workflows).
 
 ## Dependencies
 
