@@ -8,7 +8,8 @@ setup(
     packages=[package_name],
     data_files=[
         # Only for ROS support: register package with ament index
-        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/ament_index/resource_index/packages',
+         ['resource/' + package_name]),
         # Only for ROS support: include package.xml
         ('share/' + package_name, ['package.xml']),
     ],
