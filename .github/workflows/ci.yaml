@@ -30,6 +30,7 @@ jobs:
       - run: flake8 . --count --show-source --statistics
 
   test:
+    needs: [lint]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:
