@@ -7,10 +7,14 @@ This is a ROS-independent Python package containing the `Example` class. It can 
 ## System Overview
 
 ```mermaid
+%%{init: {'theme': 'dark', 'flowchart': {'curve': 'linear'}}}%%
 graph LR
-    A[assignment_example_pkg<br/>Python Library] -->|imported by| B[example_package_ros<br/>ROS2 Nodes]
-    B -->|uses messages from| C[example_package_msgs<br/>Service/Action Definitions]
-    style A fill:#4CAF50,color:#fff
+    classDef primary fill:#2d5986,stroke:#4a90d9,stroke-width:1px,color:#e0e0e0,rx:8,ry:8
+    classDef secondary fill:#1a3a5c,stroke:#3d7ab5,stroke-width:1px,color:#e0e0e0,rx:8,ry:8
+    classDef accent fill:#2d7d46,stroke:#4caf50,stroke-width:1px,color:#e0e0e0,rx:8,ry:8
+
+    A[assignment_example_pkg<br/>Python Library]:::accent -->|imported by| B[example_package_ros<br/>ROS2 Nodes]:::primary
+    B -->|uses messages from| C[example_package_msgs<br/>Service/Action Definitions]:::secondary
 ```
 
 > **Note on ROS2 distribution:** The original assignment referenced ROS2 Iron,
