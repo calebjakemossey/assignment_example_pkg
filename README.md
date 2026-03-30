@@ -136,6 +136,22 @@ example_runner "Sunrise" --ascii
 |____/ \__,_|_| |_|_|  |_|___/\___|
 ```
 
+## Development with Docker
+
+For a consistent development environment, use the CI Docker image:
+
+```bash
+docker pull ghcr.io/calebjakemossey/ros-ci:humble
+docker run -it -v $(pwd):/workspace ghcr.io/calebjakemossey/ros-ci:humble bash
+
+# Inside the container:
+cd /workspace
+pip install -r requirements.txt && pip install -e .
+python -m pytest tests/
+```
+
+This provides the same environment used by CI, ensuring local results match pipeline results.
+
 ## Running Unit Tests
 
 To ensure that the `Example` class is working correctly, you can run the unit tests provided in the `tests` directory.
