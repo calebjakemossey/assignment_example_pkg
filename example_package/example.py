@@ -1,3 +1,6 @@
+# E2E test: verify CI pipeline runs correctly
+
+
 class Example:
     def __init__(self, message):
         self.message = message
